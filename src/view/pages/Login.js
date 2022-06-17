@@ -44,8 +44,10 @@ const Login = () => {
 				{
 					userId: userId,
 					password: password
-				}
-			).then(
+				})
+				.then(response => response.json())
+				.then(response => window.localStorage.setItem("token", response.headers.get("Access-Token")))
+				.then(
 				() => {
 					navigate("/");
 					window.location.reload();
