@@ -3,6 +3,7 @@ import AuthService from "../../service/auth.service";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import {useNavigate} from "react-router-dom";
 
 const required = (value) => {
 	if (!value) {
@@ -27,6 +28,7 @@ const vUserId = (value) => {
 const Register = () => {
 	const form = useRef();
 	const checkBtn = useRef();
+	let navigate = useNavigate();
 	const [userId, setUserId] = useState("");
 	const [nameAlias, setNameAlias] = useState("");
 	const [password, setPassword] = useState("");
@@ -51,21 +53,26 @@ const Register = () => {
 		setSuccess(false);
 		form.current.validateAll();
 		if (checkBtn.current.context._errors.length === 0) {
-			AuthService.register({
+			const data = {
 				userId: userId,
 				nameAlias: nameAlias,
 				password: password
-			}).then(
-				(response) => {
-					setMessage(response.data.success);
-					setSuccess(true);
-				},
-				(error) => {
-					const resMessage = (error.response && error.response.data) || error.message || error.toString();
-					setMessage(resMessage);
-					setSuccess(false);
-				}
-			);
+			};
+			AuthService.register(data)
+				.then(
+					(response) => {
+						setMessage(response.data.success);
+						setSuccess(true);
+					},
+					(error) => {
+						const resMessage = (error.response && error.response.data) || error.message || error.toString();
+						setMessage(resMessage);
+						setSuccess(false);
+					})
+				.then(() => {
+					navigate("/login");
+					window.location.reload();
+				});
 		}
 	};
 
@@ -100,7 +107,7 @@ const Register = () => {
 							<div className="form-group">
 								<label htmlFor="password">Password</label>
 								<Input
-									type="text"
+									type="password"
 									className="form-control"
 									name="password"
 									value={password}

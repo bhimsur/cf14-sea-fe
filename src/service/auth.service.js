@@ -1,19 +1,19 @@
 import http from "./helper/http-common";
 
 const register = data => {
-	return http.post("/register", data);
+	return http.post("/user/registration", data);
 };
 
 const login = data => {
-	return http.post("/login", data);
+	return http.post("/user/login", data);
 };
 
 const logout = () => {
-	localStorage.removeItem("token");
+	localStorage.clear();
 };
 
 const getUserId = () => {
-	return JSON.parse(localStorage.getItem("token"));
+	return localStorage.getItem("nameAlias");
 };
 
 const AuthService = {

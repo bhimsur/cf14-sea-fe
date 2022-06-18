@@ -40,33 +40,36 @@ const Login = () => {
 		setLoading(true);
 		form.current.validateAll();
 		if (checkBtn.current.context._errors.length === 0) {
-			AuthService.login(
-				{
-					userId: userId,
-					password: password
+			const data = {
+				userId: userId,
+				password: password
+			};
+			console.log(data);
+			AuthService.login(data)
+				.then(response => {
+					window.localStorage.setItem("token", response.headers["access-token"]);
+					window.localStorage.setItem("nameAlias", response.data["nameAlias"]);
 				})
-				.then(response => response.json())
-				.then(response => window.localStorage.setItem("token", response.headers.get("Access-Token")))
 				.then(
-				() => {
-					navigate("/");
-					window.location.reload();
-				},
-				(error) => {
-					const resMessage = (error.response && error.response.data && error.response.data.message) ||
-						error.message || error.toString();
-					setLoading(false);
-					setMessage(resMessage);
-				}
-			);
+					() => {
+						navigate("/");
+						window.location.reload();
+					},
+					(error) => {
+						const resMessage = (error.response && error.response.data && error.response.data.message) ||
+							error.message || error.toString();
+						setLoading(false);
+						setMessage(resMessage);
+					}
+				);
 		} else {
 			setLoading(false);
 		}
 	};
 
 	return (
-		<div className="col-md-12">
-			<div className="card card-container">
+		<div className="col-md-4 col-lg-4 col-sm-8 m-auto py-3">
+			<div className="card card-container p-3 px-4">
 				<Form onSubmit={handleLogin} ref={form}>
 					<div className="form-group">
 						<label htmlFor="userId">UserId</label>
@@ -82,7 +85,7 @@ const Login = () => {
 					<div className="form-group">
 						<label htmlFor="password">Password</label>
 						<Input
-							type="text"
+							type="password"
 							className="form-control"
 							name="password"
 							value={password}
