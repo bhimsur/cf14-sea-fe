@@ -4,6 +4,7 @@ import AuthService from "../service/auth.service";
 import {Link, Route, Routes} from "react-router-dom";
 import Login from "../view/pages/Login";
 import Register from "../view/pages/Register";
+import Home from "../view/pages/Home";
 
 const App = () => {
 	const [currentUser, setCurrentUser] = useState("");
@@ -68,6 +69,7 @@ const App = () => {
 				<Routes>
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/register" element={<Register/>}/>
+					<Route path="/" element={<Home/>}/>
 				</Routes>
 			</div>
 		</div>

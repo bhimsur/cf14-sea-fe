@@ -6,15 +6,15 @@ const getAll = () => {
 };
 
 const add = (data) => {
-	return http.post("/product/add", data, authHeader);
+	return http.post("/product/add", data, {headers: authHeader()});
 };
 
 const buy = (data) => {
-	return http.post("/product/buy", data, authHeader);
+	return http.post("/product/buy", data, {headers: authHeader()});
 };
 
 const get = (data) => {
-	return http.post("/product", data, authHeader);
+	return http.post("/product", data, {headers: authHeader()});
 }
 
 const ProductService = {
