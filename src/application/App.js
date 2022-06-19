@@ -5,6 +5,7 @@ import {Link, Route, Routes} from "react-router-dom";
 import Login from "../view/pages/Login";
 import Register from "../view/pages/Register";
 import Home from "../view/pages/Home";
+import WalletHistory from "../view/pages/WalletHistory";
 
 const App = () => {
 	const [currentUser, setCurrentUser] = useState("");
@@ -70,6 +71,7 @@ const App = () => {
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/register" element={<Register/>}/>
 					<Route path="/" element={<Home/>}/>
+					<Route path="/history" element={<WalletHistory/>}/>
 				</Routes>
 			</div>
 		</div>
