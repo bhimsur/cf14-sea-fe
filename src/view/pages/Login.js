@@ -44,7 +44,6 @@ const Login = () => {
 				userId: userId,
 				password: password
 			};
-			console.log(data);
 			AuthService.login(data)
 				.then(response => {
 					window.localStorage.setItem("token", response.headers["access-token"]);

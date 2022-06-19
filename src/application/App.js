@@ -6,6 +6,7 @@ import Login from "../view/pages/Login";
 import Register from "../view/pages/Register";
 import Home from "../view/pages/Home";
 import WalletHistory from "../view/pages/WalletHistory";
+import Wallet from "../view/pages/Wallet";
 
 const App = () => {
 	const [currentUser, setCurrentUser] = useState("");
@@ -72,6 +73,7 @@ const App = () => {
 					<Route path="/register" element={<Register/>}/>
 					<Route path="/" element={<Home/>}/>
 					<Route path="/history" element={<WalletHistory/>}/>
+					<Route path="/wallet" element={<Wallet/>}/>
 				</Routes>
 			</div>
 		</div>
