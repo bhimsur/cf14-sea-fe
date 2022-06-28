@@ -7,18 +7,29 @@ import Register from "../view/pages/Register";
 import Home from "../view/pages/Home";
 import WalletHistory from "../view/pages/WalletHistory";
 import Wallet from "../view/pages/Wallet";
+import WalletService from "../service/wallet.service";
+import currencyFormatter from "../service/helper/currency";
 
 const App = () => {
 	const [currentUser, setCurrentUser] = useState("");
+	const [wallet, setWallet] = useState(0);
 	useEffect(() => {
 		const user = AuthService.getUserId();
 		if (user) {
 			setCurrentUser(user);
 		}
+		getBalance();
 	}, []);
 	const logout = () => {
 		AuthService.logout();
 	};
+
+	const getBalance = () => {
+		WalletService.getBalance()
+			.then(response => setWallet(currencyFormatter.format(response.data.amount)))
+			.catch(e => console.log(e));
+	};
+
 
 	return (
 		<div>
@@ -41,6 +52,11 @@ const App = () => {
 				{
 					currentUser ? (
 						<div className="navbar-nav ml-auto">
+							<li className="nav-item">
+								<Link to={""} className={"nav-link"}>
+									{wallet}
+								</Link>
+							</li>
 							<li className="nav-item">
 								<Link to={"/profile"} className="nav-link">
 									{currentUser}
@@ -71,7 +87,7 @@ const App = () => {
 				<Routes>
 					<Route path="/login" element={<Login/>}/>
 					<Route path="/register" element={<Register/>}/>
-					<Route path="/" element={<Home/>}/>
+					<Route path="/" element={<Home onUpdate={getBalance}/>}/>
 					<Route path="/history" element={<WalletHistory/>}/>
 					<Route path="/wallet" element={<Wallet/>}/>
 				</Routes>

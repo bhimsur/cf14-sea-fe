@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Card} from "react-bootstrap";
+import currencyFormatter from "../../service/helper/currency";
 
 const WalletHistoryCard = props => {
 	const initialWalletHistoryState = {
@@ -13,9 +14,9 @@ const WalletHistoryCard = props => {
 	return (
 		<Card style={{width: "18rem", margin: "auto", marginBottom: "1.2rem"}}>
 			<Card.Body>
-				<Card.Title>{walletHistory.transactionType}</Card.Title>
+				<Card.Title>{walletHistory.transactionType === "TOP_UP" ? "Top Up" : "Withdraw"}</Card.Title>
 				<div className="d-flex justify-content-between">
-					<Card.Text>{walletHistory.amount}</Card.Text>
+					<Card.Text>{currencyFormatter.format(walletHistory.amount)}</Card.Text>
 					<Card.Text>{walletHistory.timestamp}</Card.Text>
 				</div>
 			</Card.Body>

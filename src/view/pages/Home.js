@@ -3,7 +3,8 @@ import ProductService from "../../service/product.service";
 import ProductCard from "../components/Product.Card";
 import {Col, Row} from "react-bootstrap";
 
-const Home = () => {
+const Home = (props) => {
+	const {onUpdate} = props;
 	const [product, setProduct] = useState([]);
 	useEffect(() => {
 		getProduct();
@@ -19,6 +20,7 @@ const Home = () => {
 		const products = [...product];
 		products.splice(index, 1);
 		setProduct(products);
+		onUpdate();
 	};
 
 	return (
