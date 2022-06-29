@@ -13,7 +13,6 @@ const ProductCard = props => {
 	};
 	const [product, setProduct] = useState(initialProductState);
 	const buyProduct = () => {
-		console.log(props.index);
 		const data = {
 			productId: product.id
 		};

@@ -6,8 +6,9 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import currencyFormatter from "../../service/helper/currency";
 
-const Wallet = () => {
+const Wallet = (props) => {
 	const form = useRef();
+	const {onUpdate} = props;
 	const [wallet, setWallet] = useState(0);
 	const [amount, setAmount] = useState(0);
 	const [loading, setLoading] = useState(false);
@@ -59,6 +60,7 @@ const Wallet = () => {
 				if (response.data.success) {
 					setLoading(false);
 					setAmount("");
+					onUpdate();
 				}
 			}, error => {
 				const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
@@ -72,11 +74,11 @@ const Wallet = () => {
 
 	return (
 		<Container>
-			<Card border="light">
-				<Card.Text style={{marginRight: 0, marginLeft: "auto"}}>
-					{wallet}
-				</Card.Text>
-			</Card>
+			{/*<Card border="light">*/}
+			{/*	<Card.Text style={{marginRight: 0, marginLeft: "auto"}}>*/}
+			{/*		{wallet}*/}
+			{/*	</Card.Text>*/}
+			{/*</Card>*/}
 
 			{/*<Form onSubmit={handleTransaction} ref={form}>*/}
 			<Form ref={form}>
