@@ -9,7 +9,6 @@ import WalletHistory from "../view/pages/WalletHistory";
 import Wallet from "../view/pages/Wallet";
 import WalletService from "../service/wallet.service";
 import currencyFormatter from "../service/helper/currency";
-import Product from "../view/pages/Product";
 
 const App = () => {
 	const [currentUser, setCurrentUser] = useState("");
@@ -91,7 +90,6 @@ const App = () => {
 					<Route path="/" element={<Home onUpdate={getBalance}/>}/>
 					<Route path="/history" element={<WalletHistory/>}/>
 					<Route path="/wallet" element={<Wallet onUpdate={getBalance}/>}/>
-					<Route path="/product" element={<Product/>}/>
 				</Routes>
 			</div>
 		</div>
