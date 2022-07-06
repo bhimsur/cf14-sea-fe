@@ -18,6 +18,8 @@ jobs:
           node-version: 17.x
       - run: npm install
       - run: npm run build:dev --if-present
+        env:
+          CI: false
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
