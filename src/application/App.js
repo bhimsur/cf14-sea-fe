@@ -9,6 +9,7 @@ import WalletHistory from "../view/pages/WalletHistory";
 import Wallet from "../view/pages/Wallet";
 import WalletService from "../service/wallet.service";
 import currencyFormatter from "../service/helper/currency";
+import Product from "../view/pages/Product";
 
 const App = () => {
 	const [currentUser, setCurrentUser] = useState("");
@@ -37,18 +38,27 @@ const App = () => {
 				<Link to={"/"} className="navbar-brand">
 					Canteen
 				</Link>
-				<div className="navbar-nav mr-auto">
-					<li className="nav-item">
-						<Link to={"/history"} className="nav-link">
-							History
-						</Link>
-					</li>
-					<li className="nav-item">
-						<Link to={"/wallet"} className="nav-link">
-							Wallet
-						</Link>
-					</li>
-				</div>
+				{
+					currentUser && (
+						<div className="navbar-nav mr-auto">
+							<li className="nav-item">
+								<Link to={"/history"} className="nav-link">
+									History
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link to={"/wallet"} className="nav-link">
+									Wallet
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link to={"/product"} className="nav-link">
+									Sell
+								</Link>
+							</li>
+						</div>
+					)
+				}
 				{
 					currentUser ? (
 						<div className="navbar-nav ml-auto">
@@ -58,9 +68,9 @@ const App = () => {
 								</Link>
 							</li>
 							<li className="nav-item">
-								<Link to={"/profile"} className="nav-link">
+								<div className="nav-link">
 									{currentUser}
-								</Link>
+								</div>
 							</li>
 							<li className="nav-item">
 								<a href="/login" className="nav-link" onClick={logout}>
@@ -90,6 +100,7 @@ const App = () => {
 					<Route path="/" element={<Home onUpdate={getBalance}/>}/>
 					<Route path="/history" element={<WalletHistory/>}/>
 					<Route path="/wallet" element={<Wallet onUpdate={getBalance}/>}/>
+					<Route path="/product" element={<Product/>}/>
 				</Routes>
 			</div>
 		</div>

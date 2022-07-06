@@ -5,8 +5,8 @@ const getAll = () => {
 	return http.get("/product");
 };
 
-const add = (data) => {
-	return http.post("/product/add", data, {headers: authHeader()});
+const add = (data, onUploadProgress) => {
+	return http.post("/product/add", data, {headers: authHeader()}, onUploadProgress);
 };
 
 const buy = (data) => {

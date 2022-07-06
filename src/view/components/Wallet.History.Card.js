@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {Card} from "react-bootstrap";
 import currencyFormatter from "../../service/helper/currency";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowTrendDown, faArrowTrendUp, faCartShopping, faMoneyBillTrendUp, faMoneyCheckDollar} from '@fortawesome/free-solid-svg-icons'
 
 const WalletHistoryCard = props => {
 	const initialWalletHistoryState = {
@@ -11,21 +13,24 @@ const WalletHistoryCard = props => {
 	};
 
 	const getTransactionType = (transactionType) => {
-		let tt = "";
+		let tt;
 		switch (transactionType) {
 			case "TOP_UP":
-				tt = "Top Up";
+				tt = (<div><FontAwesomeIcon icon={faArrowTrendUp}/> Top Up</div>);
 				break;
 			case "WITHDRAW":
-				tt = "Withdraw";
+				tt = (<div><FontAwesomeIcon icon={faArrowTrendDown}/> Withdraw</div>);
 				break;
 			case "BUY":
-				tt = "Buy";
+				tt = (<div><FontAwesomeIcon icon={faCartShopping}/> Buy</div>);
+				break;
+			case "BUY_OWN_ITEM":
+				tt = (<div><FontAwesomeIcon icon={faMoneyCheckDollar}/> Buy Own Item</div>);
 				break;
 			default:
-				tt = "Sell"
+				tt = (<div><FontAwesomeIcon icon={faMoneyBillTrendUp}/> Sell</div>);
 		}
-		return tt;
+		return (tt);
 	}
 
 	const [walletHistory, setWalletHistory] = useState(initialWalletHistoryState);
