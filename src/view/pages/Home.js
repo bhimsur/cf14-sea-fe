@@ -7,10 +7,9 @@ import orderBy from "lodash/sortBy";
 const Home = (props) => {
 	const {onUpdate} = props;
 	const [product, setProduct] = useState([]);
-	const [sortType, setSortType] = useState("dateAsc");
 	useEffect(() => {
 		getProduct();
-	}, [sortType]);
+	}, []);
 	const getProduct = () => {
 		ProductService.getAll()
 			.then(response => {
@@ -34,8 +33,6 @@ const Home = (props) => {
 			dateDesc: "createDate",
 		};
 		const sortProperty = types[type];
-		// let sorted = [...product].sort((a, b) => b[sortProperty] - a[sortProperty]);
-		// let sorted = [...product].sort((a, b) => (a[sortProperty] > b[sortProperty]) - (a[sortProperty] < b[sortProperty]));
 		let sorted;
 		if (type.includes("name")) {
 			sorted = orderBy([...product], [p => p[sortProperty].toLowerCase()], ["asc"]);

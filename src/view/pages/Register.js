@@ -78,7 +78,7 @@ const Register = () => {
 
 	return (
 		<div className="col-md-12">
-			<div className="card card-container">
+			<div className="card card-container p-3 px-4">
 				<Form onSubmit={handleRegister} ref={form}>
 					{!success && (
 						<div>
