@@ -18,8 +18,8 @@ const App = () => {
 		const user = AuthService.getUserId();
 		if (user) {
 			setCurrentUser(user);
+			getBalance();
 		}
-		getBalance();
 	}, []);
 	const logout = () => {
 		AuthService.logout();

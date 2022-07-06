@@ -12,9 +12,10 @@ const Home = (props) => {
 	}, []);
 	const getProduct = () => {
 		ProductService.getAll()
-			.then(response => {
+			.then((response) => {
 				setProduct(response.data.result);
-				// sortProduct(sortType);
+			}, (error) => {
+				console.log(error);
 			})
 			.catch(e => console.log(e));
 	};
@@ -49,11 +50,11 @@ const Home = (props) => {
 	return (
 		<div>
 			<div className="py-3 d-flex ml-auto align-items-end flex-column">
-				<select onChange={e => sortProduct(e.target.value)}>
+				<select onChange={e => sortProduct(e.target.value)} defaultValue="dateAsc">
 					<option value="nameAsc">A-Z</option>
 					<option value="nameDesc">Z-A</option>
-					<option value="dateAsc">Newest</option>
-					<option value="dateDesc">Oldest</option>
+					<option value="dateAsc">Oldest</option>
+					<option value="dateDesc">Newest</option>
 				</select>
 			</div>
 			<Row xs={1} md={2} lg={3} className="g-4">
